@@ -1,10 +1,14 @@
 import { useState } from "react";
-
+import {useDispatch} from "react-redux";
 const Header = ({ toggleSideMenu, toggleTheme, isDark }) => {
     // Add state for menus
     const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
 
+  const handleLogout = ()=>{
+    dispatch(logout());
+  }
     return (
       <header className="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
         <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
@@ -117,7 +121,7 @@ const Header = ({ toggleSideMenu, toggleTheme, isDark }) => {
                       </a>
                     </li>
                     <li class="flex">
-                      <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="#">
+                      <a onClick={handleLogout} class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="/login">
                         <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                           <path d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
                         </svg>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
@@ -8,6 +8,7 @@ import Forms from "./Forms";
 import Login from "./Login";
 
 function App() {
+  
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
@@ -53,8 +54,18 @@ function App() {
 
   return (
     <BrowserRouter>
+    
       <Routes>
-        {/* Pages with DefaultLayout */}
+      <Route 
+          path="/login" 
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          } 
+        />
+       
+     
         <Route 
           path="/" 
           element={
@@ -72,15 +83,8 @@ function App() {
           } 
         />
 
-        {/* Pages with AuthLayout */}
-        <Route 
-          path="/login" 
-          element={
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
-          } 
-        />
+      
+      
         <Route 
           path="/create-account" 
           element={
@@ -90,15 +94,10 @@ function App() {
           } 
         />
 
-        {/* Fallback route */}
-        <Route 
-          path="*" 
-          element={
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
-          } 
-        />
+<Route 
+    path="*" 
+    element={<Navigate to="/login" replace />} 
+  />
       </Routes>
     </BrowserRouter>
   );
