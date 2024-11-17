@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
-import Dashboard from "./Dashboard";
-import CreateAccount from "./CreateAccount";
-import Forms from "./Forms";
-import Login from "./Login";
+import Sidebar from "./Components/Sidebar";
+import Header from "./Components/Header";
+import Dashboard from "./Pages/Dashboard";
+import CreateAccount from "./Pages/CreateAccount";
+import Forms from "./Pages/Forms";
+import Login from "./Pages/Login";
+import Blogs from "./pages/Blogs";
+import CreateBlogs from "./Pages/CreateBlogs";
+import EditBlog from "./Pages/EditBlog";
 
 function App() {
   
@@ -64,6 +67,22 @@ function App() {
             </AuthLayout>
           } 
         />
+         <Route 
+          path="/blogs" 
+          element={
+            <DefaultLayout>
+              <Blogs />
+            </DefaultLayout>
+          } 
+        />
+        <Route 
+          path="/createBlog" 
+          element={
+            <DefaultLayout>
+              <CreateBlogs />
+            </DefaultLayout>
+          } 
+        />
        
      
         <Route 
@@ -91,6 +110,14 @@ function App() {
             <AuthLayout>
               <CreateAccount />
             </AuthLayout>
+          } 
+        />
+        <Route 
+          path="/editBlog" 
+          element={
+            <DefaultLayout>
+              <EditBlog />
+            </DefaultLayout>
           } 
         />
 

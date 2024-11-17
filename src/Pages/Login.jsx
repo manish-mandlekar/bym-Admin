@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "./redux/authSlice"; // We'll create this later
+import { loginUser } from "../redux/authSlice"; // We'll create this later
 
 function Login() {
   const [credentials, setCredentials] = useState({
