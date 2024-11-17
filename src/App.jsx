@@ -6,7 +6,7 @@ import Dashboard from "./Pages/Dashboard";
 import CreateAccount from "./Pages/CreateAccount";
 import Forms from "./Pages/Forms";
 import Login from "./Pages/Login";
-import Blogs from "./pages/Blogs";
+import Blogs from "./Pages/Blogs";
 import CreateBlogs from "./Pages/CreateBlogs";
 import EditBlog from "./Pages/EditBlog";
 
