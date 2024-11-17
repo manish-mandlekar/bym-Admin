@@ -40,7 +40,7 @@ const Sidebar = ({ isSideMenuOpen }) => {
               </button>
               </Link>
 
-             <Link to="/forms" className="hover:bg-[#dadada] rounded-lg ">
+             <Link to="/category" className="hover:bg-[#dadada] rounded-lg ">
              <button className="px-5 py-3 font-medium leading-5 text-black transition-colors duration-150  border border-transparent   focus:outline-none focus:shadow-outline-purple flex items-center gap-6">
                 <svg
                   className="w-5 h-5"

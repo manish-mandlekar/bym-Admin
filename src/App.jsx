@@ -4,11 +4,11 @@ import Sidebar from "./Components/Sidebar";
 import Header from "./Components/Header";
 import Dashboard from "./Pages/Dashboard";
 import CreateAccount from "./Pages/CreateAccount";
-import Forms from "./Pages/Forms";
 import Login from "./Pages/Login";
 import Blogs from "./Pages/Blogs";
 import CreateBlogs from "./Pages/CreateBlogs";
 import EditBlog from "./Pages/EditBlog";
+import Category from "./Pages/Category";
 
 function App() {
   
@@ -94,10 +94,10 @@ function App() {
           } 
         />
         <Route 
-          path="/forms" 
+          path="/category" 
           element={
             <DefaultLayout>
-              <Forms />
+            <Category />
             </DefaultLayout>
           } 
         />
