@@ -7,3 +7,8 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+@media screen and (max-width: 932px) {
+  .menu-btn {
+    display: initial;
+  }
+}

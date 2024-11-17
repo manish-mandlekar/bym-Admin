@@ -13,7 +13,7 @@ const Header = ({ toggleSideMenu, toggleTheme, isDark }) => {
       <header className="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
         <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
         <button
-            className="p-1 -ml-1 rounded-md xs:block hidden focus:outline-none focus:shadow-outline-purple"
+            className="p-1 -ml-1 rounded-md xs:block hidden focus:outline-none focus:shadow-outline-purple menu-btn"
             onClick={toggleSideMenu}
             aria-label="Menu"
           >
