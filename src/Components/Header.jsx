@@ -1,14 +1,21 @@
+import axios from "axios";
 import { useState } from "react";
-import {useDispatch} from "react-redux";
+
 const Header = ({ toggleSideMenu, toggleTheme, isDark }) => {
+  
     // Add state for menus
     const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const dispatch = useDispatch();
 
-  const handleLogout = ()=>{
-    dispatch(logout());
-  }
+
+  const handleLogout = async () => {
+    try {
+        await axios.post('/logout'); 
+    } catch (error) {
+        console.error("Logout failed:", error);
+   
+    }
+}
     return (
       <header className="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
         <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">

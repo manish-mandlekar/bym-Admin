@@ -23,16 +23,13 @@ ChartJS.register(
 )
 
 const Dashboard = () => {
+  console.log("Dashboard component rendered");
   return (
-    <main className="h-full overflow-y-auto">
-      <div className="container px-6 mx-auto grid">
-       <h1>Dashboard</h1>
-        {/* Cards */}
-        {/* Tables */}
-        {/* Charts */}
-      </div>
-    </main>
-  )
-}
+    <div>
+      <h1>Welcome to the Dashboard</h1>
+      {/* Add more content here */}
+    </div>
+  );
+};
 
 export default Dashboard

@@ -7,7 +7,6 @@ const authSlice = createSlice({
       loaduser: (state,action)=>{
         state.user = action.payload
       },
-    
 
     },
     

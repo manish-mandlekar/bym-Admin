@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { loginUser } from "../redux/authSlice"; // We'll create this later
+
+import axios from "axios";
 
 function Login() {
+
+  const navigate = useNavigate()
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials({
@@ -24,14 +25,27 @@ function Login() {
     e.preventDefault();
     setError(""); // Clear any previous errors
     try {
-      // const result = await dispatch(loginUser(credentials)).unwrap();
-      console.log("Login successful:", result); // Debug log
-      navigate("/");
+      const { data } = await axios.post(
+        "https://builds-backend-wc2e.onrender.com/auth/login",
+        credentials
+      );
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        navigate('/');
+      }
     } catch (error) {
       console.error("Failed to login:", error);
       setError(error.message || "Failed to login. Please try again.");
     }
   };
+  useEffect(() => {
+    const getToken = localStorage.getItem("token");
+
+    if (getToken) {
+//  navigate('/')
+    }
+  }, []);
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-fit max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -89,6 +103,7 @@ function Login() {
                 )}
                 <button
                   type="submit"
+          
                   className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
                   Log in
