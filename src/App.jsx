@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./Components/Sidebar";
+import Loader from "./Components/Loader";
 import Header from "./Components/Header";
 import Dashboard from "./Pages/Dashboard";
 import CreateAccount from "./Pages/CreateAccount";
@@ -9,9 +10,13 @@ import Blogs from "./Pages/Blogs";
 import CreateBlogs from "./Pages/CreateBlogs";
 import EditBlog from "./Pages/EditBlog";
 import Category from "./Pages/Category";
+import { asyncLoadUser } from "./redux/userAction";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  
+  const dispatch = useDispatch();
+  const { user, loading } = useSelector((state) => state.user);
+
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
@@ -22,6 +27,13 @@ function App() {
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
+
+  useEffect(() => {
+    dispatch(asyncLoadUser());
+  }, []);
+  if (loading) {
+    return <Loader />;
+  }
 
   // Layout for pages with sidebar and header
   const DefaultLayout = ({ children }) => (
@@ -35,9 +47,7 @@ function App() {
             isDark={isDark}
           />
           <main className="h-full overflow-y-auto">
-            <div className="container px-6 mx-auto">
-              {children}
-            </div>
+            <div className="container px-6 mx-auto">{children}</div>
           </main>
         </div>
       </div>
@@ -57,74 +67,67 @@ function App() {
 
   return (
     <BrowserRouter>
-    
       <Routes>
-      <Route 
-          path="/login" 
+        <Route
+          path="/login"
           element={
             <AuthLayout>
               <Login />
             </AuthLayout>
-          } 
+          }
         />
-         <Route 
-          path="/blogs" 
+        <Route
+          path="/blogs"
           element={
             <DefaultLayout>
               <Blogs />
             </DefaultLayout>
-          } 
+          }
         />
-        <Route 
-          path="/createBlog" 
+        <Route
+          path="/createBlog"
           element={
             <DefaultLayout>
               <CreateBlogs />
             </DefaultLayout>
-          } 
+          }
         />
-       
-     
-        <Route 
-          path="/" 
+
+        <Route
+          path="/"
           element={
             <DefaultLayout>
               <Dashboard />
             </DefaultLayout>
-          } 
+          }
         />
-        <Route 
-          path="/category" 
+        <Route
+          path="/category"
           element={
             <DefaultLayout>
-            <Category />
+              <Category />
             </DefaultLayout>
-          } 
+          }
         />
 
-      
-      
-        <Route 
-          path="/create-account" 
+        <Route
+          path="/create-account"
           element={
             <AuthLayout>
               <CreateAccount />
             </AuthLayout>
-          } 
+          }
         />
-        <Route 
-          path="/editBlog" 
+        <Route
+          path="/editBlog"
           element={
             <DefaultLayout>
               <EditBlog />
             </DefaultLayout>
-          } 
+          }
         />
 
-<Route 
-    path="*" 
-    element={<Navigate to="/login" replace />} 
-  />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

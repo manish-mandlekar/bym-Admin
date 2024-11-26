@@ -1,47 +1,57 @@
-import React from 'react'
-import Edit from '../../public/edit.png';
-import Trash from '../../public/trash.png';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import Edit from "../../public/edit.png";
+import Trash from "../../public/trash.png";
+import { Link } from "react-router-dom";
+import Axios from "../Axios";
 const Category = () => {
   // Sample data - in a real app, this would likely come from an API or props
   const tableData = [
     {
       id: 1,
-      Image: 'Hat',
-      role: '10x Developer',
-      description:'Matt Dickersons',
-      parentCategory: 'javascript',
-      action: 'Approved',
-      avatar: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+      Image: "Hat",
+      role: "10x Developer",
+      description: "Matt Dickersons",
+      parentCategory: "javascript",
+      action: "Approved",
+      avatar:
+        "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
     },
-    
+
     // ... add more data entries as needed
   ];
 
+  const getCategories = async () => {
+    try {
+      // const { data } = await Axios.get("/catagories");
+      // console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
+    getCategories();
+  }, []);
   return (
     <main className="h-full pb-16 overflow-y-auto">
       <div className="container grid px-6 mx-auto">
-        <div className='flex justify-between items-center'>
-   
-       <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-         Category
-        </h2>
-      
+        <div className="flex justify-between items-center">
+          <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            Category
+          </h2>
 
-  {/* <Link to='/createBlog'>
+          {/* <Link to='/createBlog'>
   <button className='bg-[#7e3af2] text-white px-4 py-2 rounded-md'>
         + Create Category
       </button>
   </Link> */}
         </div>
-       
 
         {/* Table */}
         <h4 className="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
           Category with avatars
         </h4>
-        
+
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
           <div className="w-full overflow-x-auto">
             <table className="w-full whitespace-no-wrap">
@@ -55,7 +65,10 @@ const Category = () => {
               </thead>
               <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                 {tableData.map((user) => (
-                  <tr key={user.id} className="text-gray-700 dark:text-gray-400">
+                  <tr
+                    key={user.id}
+                    className="text-gray-700 dark:text-gray-400"
+                  >
                     <td className="px-4 py-3">
                       <div className="flex items-center text-sm">
                         <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -81,14 +94,14 @@ const Category = () => {
                     <td className="px-4 py-3 text-sm">{user.description}</td>
                     <td className="px-4 py-3 text-sm">{user.parentCategory}</td>
                     <td className="px-4 py-3 text-xs flex gap-2">
-                       <Link to='/editBlog'>
-                       <button>
-                            <img src={Edit} alt="edit" />
-                        </button>
-                       </Link>
+                      <Link to="/editBlog">
                         <button>
-                            <img src={Trash} alt="trash" />
+                          <img src={Edit} alt="edit" />
                         </button>
+                      </Link>
+                      <button>
+                        <img src={Trash} alt="trash" />
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -117,5 +130,4 @@ const Category = () => {
   );
 };
 
-export default Category
-
+export default Category;
