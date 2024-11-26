@@ -12,10 +12,15 @@ import EditBlog from "./Pages/EditBlog";
 import Category from "./Pages/Category";
 import { asyncLoadUser } from "./redux/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import ExamForm from "./Pages/ExamForm";
+import CreateCategory from "./Pages/CreateCategory";
+
 
 function App() {
+  
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.user);
+console.log(loading);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -74,6 +79,23 @@ function App() {
             <AuthLayout>
               <Login />
             </AuthLayout>
+          }
+        />
+
+<Route
+          path="/examform"
+          element={
+            <AuthLayout>
+            <ExamForm/>
+            </AuthLayout>
+          }
+        />
+         <Route
+          path="/createCategory"
+          element={
+            <DefaultLayout>
+              <CreateCategory/>
+            </DefaultLayout>
           }
         />
         <Route

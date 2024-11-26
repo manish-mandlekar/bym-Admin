@@ -1,34 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Edit from "../../public/edit.png";
 import Trash from "../../public/trash.png";
 import { Link } from "react-router-dom";
 import Axios from "../Axios";
-const Category = () => {
-  // Sample data - in a real app, this would likely come from an API or props
-  const tableData = [
-    {
-      id: 1,
-      Image: "Hat",
-      role: "10x Developer",
-      description: "Matt Dickersons",
-      parentCategory: "javascript",
-      action: "Approved",
-      avatar:
-        "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
-    },
+import { useDispatch } from "react-redux";
+import { removeCategoryAction} from "../redux/userAction";
 
-    // ... add more data entries as needed
-  ];
+const Category = () => {
+  
+  
+  const [categories, setCategories] = useState([]);
+  
+  const dispatch = useDispatch()
+
 
   const getCategories = async () => {
     try {
-      // const { data } = await Axios.get("/catagories");
-      // console.log(data);
-    } catch (err) {
-      console.log(err);
+      const { data } = await Axios.get("/catagories");
+      console.log(data);
+      setCategories(data)
+     
+    } catch (error) {
+      console.log(error.message);
+      
     }
   };
-
+const handleRemove = (id)=>{
+dispatch(removeCategoryAction(id))
+}
   useEffect(() => {
     getCategories();
   }, []);
@@ -38,13 +37,14 @@ const Category = () => {
         <div className="flex justify-between items-center">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Category
+            
           </h2>
 
-          {/* <Link to='/createBlog'>
+          <Link to='/createCategory'>
   <button className='bg-[#7e3af2] text-white px-4 py-2 rounded-md'>
         + Create Category
       </button>
-  </Link> */}
+  </Link>
         </div>
 
         {/* Table */}
@@ -64,7 +64,7 @@ const Category = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                {tableData.map((user) => (
+                {categories.map((user) => (
                   <tr
                     key={user.id}
                     className="text-gray-700 dark:text-gray-400"
@@ -72,21 +72,21 @@ const Category = () => {
                     <td className="px-4 py-3">
                       <div className="flex items-center text-sm">
                         <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img
+                          {/* <img
                             className="object-cover w-full h-full rounded-full"
                             src={user.avatar}
                             alt=""
                             loading="lazy"
-                          />
+                          /> */}
                           <div
                             className="absolute inset-0 rounded-full shadow-inner"
                             aria-hidden="true"
                           ></div>
                         </div>
                         <div>
-                          <p className="font-semibold">{user.Image}</p>
+                          {/* <p className="font-semibold">{user.Image}</p> */}
                           <p className="text-xs text-gray-600 dark:text-gray-400">
-                            {user.role}
+                            {user.name}
                           </p>
                         </div>
                       </div>
@@ -99,7 +99,7 @@ const Category = () => {
                           <img src={Edit} alt="edit" />
                         </button>
                       </Link>
-                      <button>
+                      <button onClick={()=>handleRemove(user.id)}>
                         <img src={Trash} alt="trash" />
                       </button>
                     </td>
