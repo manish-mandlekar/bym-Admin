@@ -20,7 +20,7 @@ function App() {
   
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.user);
-console.log(loading);
+console.log(user);
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -90,6 +90,8 @@ console.log(loading);
             </AuthLayout>
           }
         />
+
+
          <Route
           path="/createCategory"
           element={

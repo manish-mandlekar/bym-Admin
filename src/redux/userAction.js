@@ -1,11 +1,14 @@
-import { data } from "autoprefixer";
-import Axios from "../Axios";
+// import { data } from "autoprefixer";
 import { loaduser, setloading,addCategory , removeCategory } from "./userSlice";
+import Axios from "../Axios";
 
 export const asyncLoadUser = () => async (dispatch) => {
+  
+  
   try {
     dispatch(setloading(true));
     const token = localStorage.getItem("token");
+    console.log(token);
     if (!token) {
       dispatch(setloading(false))
       return
@@ -17,6 +20,7 @@ export const asyncLoadUser = () => async (dispatch) => {
       },
     };
     const { data } = await Axios.get("/me", config);
+    console.log(data);
     
     dispatch(loaduser(data));
     dispatch(setloading(false));
@@ -50,16 +54,26 @@ export const asyncLoadCategory = () => async (dispatch) => {
   }
 };
 export const removeCategoryAction = (id)=> async (dispatch)=>{
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
   try {
-    Axios.delete(`/catagories/${id}`)
-    dispatch(removeCategory({id}))
+    const data = await Axios.delete(`/catagories/${id}`,config)
+    console.log(data);
+    
+    // dispatch(removeCategory({id}))
   } catch (error) {
     alert("failed to delete category",error.message)
   }
 }
-export const addCategory = ()=>()=>{
+export const addCategoryAction = ()=>()=>{
   try {
     dispatch(setloading(true))
+    
     
   } catch (error) {
     

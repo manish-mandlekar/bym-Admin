@@ -29,6 +29,7 @@ function Login() {
         "https://builds-backend-wc2e.onrender.com/auth/login",
         credentials
       );
+console.log(data);
 
       if (data.token) {
         localStorage.setItem("token", data.token);

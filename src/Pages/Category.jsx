@@ -3,12 +3,14 @@ import Edit from "../../public/edit.png";
 import Trash from "../../public/trash.png";
 import { Link } from "react-router-dom";
 import Axios from "../Axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeCategoryAction} from "../redux/userAction";
 
 const Category = () => {
+  // const {user} = useSelector(state=>state.user)
+  // console.log(user);
   
-  
+   
   const [categories, setCategories] = useState([]);
   
   const dispatch = useDispatch()
@@ -26,7 +28,11 @@ const Category = () => {
     }
   };
 const handleRemove = (id)=>{
-dispatch(removeCategoryAction(id))
+  if(window.confirm("are you sure want to delete this category?")){
+  console.log(id);
+  
+    dispatch(removeCategoryAction(id))
+  }
 }
   useEffect(() => {
     getCategories();
